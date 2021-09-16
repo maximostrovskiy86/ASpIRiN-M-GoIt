@@ -1,7 +1,7 @@
 import modalTemplateTpl from '../../templates/modal.hbs';
 import newApiService from '../services/apiSevise';
-import {queueBtnRefs} from "../const/refs";
-import {queueSave} from "./queue";
+import { queueBtnRefs } from '../const/refs';
+import { queueSave } from './queue';
 
 const refs = {
   openList: document.querySelector('.media-container'),
@@ -9,7 +9,6 @@ const refs = {
   backDrop: document.querySelector('.backdrop'),
   modal: document.querySelector('.modal-wrapper'),
 };
-
 
 async function onPictureClick(evt) {
   evt.preventDefault();
@@ -28,19 +27,20 @@ async function onPictureClick(evt) {
   window.addEventListener('keydown', onEscKeyPress);
   appendModalMarkup(data);
   refs.backDrop.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
 
   const queueBtnRefs = document.querySelector('.js-queue');
   queueBtnRefs.addEventListener('click', queueSave);
 }
 
-
 function appendModalMarkup(data) {
-  return refs.modal.innerHTML = modalTemplateTpl(data);
+  return (refs.modal.innerHTML = modalTemplateTpl(data));
 }
 
 function onCloseModal() {
   window.removeEventListener('keydown', onEscKeyPress);
   refs.backDrop.classList.remove('is-open');
+  document.body.style.overflow = 'auto';
 }
 
 function onbackDropClick(e) {
@@ -56,10 +56,6 @@ function onEscKeyPress(e) {
   }
 }
 
-
-
-refs.openList.addEventListener('click', onPictureClick)
+refs.openList.addEventListener('click', onPictureClick);
 refs.closeModal.addEventListener('click', onCloseModal);
 refs.backDrop.addEventListener('click', onbackDropClick);
-
-
