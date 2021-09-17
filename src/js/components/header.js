@@ -1,9 +1,9 @@
-import { outputRefs } from '../const/refs';
+import {queueBtn,watchedBtn} from '../const/refs';
 import itemMediaTpl from '../../templates/item-media.hbs';
 import errorNotification from './pnotify';
 import startPagination from '../components/tui-pagination';
 import prepareData from '../services/prepareData';
-import onLoadPage from '../components/media';
+
 import {
   homeLink,
   libraryLink,
@@ -15,10 +15,9 @@ import {
 } from '../const/refs';
 
 import apiService from '../services/apiSevise';
-import libraryLinkMarkup from './queue';
-// =========================
+import {appendQueueMarkup, appendWatchedMarkup} from './queue';
+import appendMediaMarkup from './media'
 
-// =========================
 function homeInputHeader() {
   inputLink.classList.remove('is-hidden');
   buttonsLink.classList.add('is-hidden');
@@ -26,6 +25,7 @@ function homeInputHeader() {
   libraryLink.classList.remove('navigation__link--active');
   headerLink.classList.remove('is-hidden');
   headerRefs.classList.remove('bg-library');
+  appendMediaMarkup();
 }
 
 function homeLibraryHeader() {
@@ -35,8 +35,24 @@ function homeLibraryHeader() {
   libraryLink.classList.add('navigation__link--active');
   headerLink.classList.add('is-hidden');
   headerRefs.classList.add('bg-library');
-  libraryLinkMarkup();
+  appendWatchedMarkup();
 }
+
+function openQueue() {
+  appendQueueMarkup();
+  queueBtn.classList.add('accent-color');
+  watchedBtn.classList.remove('accent-color');
+}
+
+function openWatched() {
+  appendWatchedMarkup();
+  queueBtn.classList.remove('accent-color');
+  watchedBtn.classList.add('accent-color');
+}
+
+
+queueBtn.addEventListener('click', openQueue);
+watchedBtn.addEventListener('click', openWatched);
 
 homeLink.addEventListener('click', homeInputHeader);
 libraryLink.addEventListener('click', homeLibraryHeader);
@@ -59,42 +75,16 @@ async function serchMovieHandler(event) {
     return;
   }
 
-  // const genresArr = [...genres.genres];
-
-  // const result = data.results.map(item => ({
-  //   ...item,
-  //   release_date: getDate(item),
-  //   genre_ids: getGenres([...item.genre_ids]),
-  // }));
-  // console.log('result', result);
-
-  // function getDate(item) {
-  //   const rDate = new Date(item.release_date);
-  //   const year = rDate.getFullYear();
-  //   return year;
-  // }
-
-  // function getGenres(arr) {
-  //   let newArr = [];
-  //   for (let i = 0; i < arr.length; i++) {
-  //     for (let j = 0; j < genresArr.length; j++) {
-  //       if (genresArr[j].id == arr[i]) {
-  //         newArr.push(genresArr[j].name);
-  //       }
-  //     }
-  //   }
-  //   return newArr;
-  // }
-
   // const newData = { ...data, results: result };
   // console.log(newData);
-  const newData = prepareData(data);
-  appendMediaMarkup(newData);
+  // const newData = prepareData(data);
+  // console.log('newData:', newData)
+  // appendMediaMarkup(newData);
   startPagination(data.total_pages);
 }
 
 // ===============================
 
-function appendMediaMarkup({ results }) {
-  return (outputRefs.innerHTML = itemMediaTpl(results));
-}
+// function appendMediaMarkup({results}) {
+//   return (outputRefs.innerHTML = itemMediaTpl(results));
+// }

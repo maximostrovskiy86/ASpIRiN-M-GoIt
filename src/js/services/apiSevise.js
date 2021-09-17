@@ -4,7 +4,7 @@ import { BASE_FETCH_URL, API_KEY } from '../const';
 class ApiService {
   constructor() {
     this.query = '';
-    this.openFilm = null;
+    this.openedFilm = null;
   }
 
   async fetchGetMediaTrending(page) {
@@ -30,7 +30,7 @@ class ApiService {
       `${BASE_FETCH_URL}search/movie?api_key=${API_KEY}&language=en-US&page=${page}&query=${this.query}`,
     );
     const movies = await response.json();
-    console.log(movies);
+    // console.log(movies);
     return movies;
   }
   set searchQuery(value) {
@@ -41,7 +41,7 @@ class ApiService {
     const response = await fetch(`${BASE_FETCH_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`);
     const movie = await response.json();
     // console.log(movie)
-    this.openFilm = movie;
+    this.openedFilm = movie;
     return movie;
   }
 }

@@ -1,7 +1,7 @@
 import modalTemplateTpl from '../../templates/modal.hbs';
 import newApiService from '../services/apiSevise';
-import { queueBtnRefs } from '../const/refs';
-import { queueSave } from './queue';
+// import { queueBtnRefs } from '../const/refs';
+import { watchedSave, queueSave } from './queue';
 
 const refs = {
   openList: document.querySelector('.media-container'),
@@ -30,7 +30,10 @@ async function onPictureClick(evt) {
   refs.backDrop.classList.add('is-open');
   document.body.style.overflow = 'hidden';
 
+  const watchedBtnRefs = document.querySelector('.js-watched');
   const queueBtnRefs = document.querySelector('.js-queue');
+
+  watchedBtnRefs.addEventListener('click', watchedSave);
   queueBtnRefs.addEventListener('click', queueSave);
 }
 

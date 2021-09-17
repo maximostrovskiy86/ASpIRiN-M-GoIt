@@ -1,52 +1,77 @@
 import newApiService from "../services/apiSevise";
-import {outputRefs} from "../const/refs";
+import {outputRefs, queueBtn, watchedBtn} from "../const/refs";
 import localStorageFn from "./localStorage";
-import watchedQueueTpl from "../../templates/watched-queue.hbs";
+import watchedQueueTpl from "../../templates/item-media.hbs";
+
+export const watchedSave = () => {
+  console.log(111)
+  const film = newApiService.openedFilm;
+  const localWatched = localStorageFn.load('dataWatched');
+  console.log(localWatched)
+
+  if (!localWatched) {
+    const arrayWatched = [film];
+    localStorageFn.save('dataWatched', arrayWatched);
+    return;
+  }
+
+  const isFind = localWatched.some(item => item.id === film.id);
+
+  // const checker = () => {
+  //   for (let i = 0; i < localWatched.length; i++) {
+  //     console.log(localWatched[i].id)
+  //     if (localWatched[i].id === film.id) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // };
+
+  if (localWatched.length === 0 || !isFind) {
+    localWatched.push(film);
+    localStorageFn.save('dataWatched', localWatched);
+    return;
+  }
+
+  // localWatched.push(film);
+
+}
+
+export function appendWatchedMarkup() {
+  const localWatched = localStorageFn.load('dataWatched');
+  watchedBtn.classList.add('accent-color');
+  return outputRefs.innerHTML = watchedQueueTpl(localWatched);
+}
+
+// export default appendQueueMarkup;
 
 
 export const queueSave = () => {
-  const film = newApiService.openFilm;
-  console.log(film)
-
-  // localStorage.setItem('data', JSON.stringify(data));
-  //
-  // //
-  // const dataStorage = localStorage.getItem(data)
-  // // console.log(dataStorage)
+  const film = newApiService.openedFilm;
   const localQueue = localStorageFn.load('dataQueue');
 
   // console.log(localQueue)
   if (!localQueue) {
     const arrayQueue = [film];
-    console.log(arrayQueue)
     localStorageFn.save('dataQueue', arrayQueue);
     return;
   }
 
+
   localQueue.push(film)
   localStorageFn.save('dataQueue', localQueue);
   return localQueue;
-  // const markup = localQueue.map(item => {
-  //   console.log(item)
-  //   return item;
-  // })
-
-  // console.log(markup)
-
-  // appendMediaMarkup(localQueue);
-
 }
 
-function appendMediaMarkup(queueSave) {
-  // const data = localStorage.getItem('dataQueue');
-  // const parseData = JSON.parse(data) || [];
-  // console.log(queueSave)
+export function appendQueueMarkup() {
   const localQueue = localStorageFn.load('dataQueue');
-  console.log(localQueue)
   return outputRefs.innerHTML = watchedQueueTpl(localQueue);
 }
 
-export default appendMediaMarkup;
+
+
+
+
 
 
 

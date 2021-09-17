@@ -1,4 +1,12 @@
 /* ========== Header ========== */
+.header-button-watched.accent-color {
+  background-color: $accent-color;
+}
+
+.header-button-queue.accent-color {
+  background-color: $accent-color;
+}
+
 .header {
   height: 230px;
   &__container {
@@ -237,7 +245,7 @@
   justify-content: center;
 }
 
-.header-button-wached {
+.header-button-watched {
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
