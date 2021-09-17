@@ -1,5 +1,5 @@
 import newApiService from "../services/apiSevise";
-import {outputRefs } from "../const/refs";
+import {outputRefs} from "../const/refs";
 import localStorageFn from "./localStorage";
 import watchedQueueTpl from "../../templates/watched-queue.hbs";
 
@@ -37,12 +37,12 @@ export const queueSave = () => {
 
 }
 
- function appendMediaMarkup(queueSave) {
+function appendMediaMarkup(queueSave) {
   // const data = localStorage.getItem('dataQueue');
   // const parseData = JSON.parse(data) || [];
   // console.log(queueSave)
-   const localQueue = localStorageFn.load('dataQueue');
-   console.log(localQueue)
+  const localQueue = localStorageFn.load('dataQueue');
+  console.log(localQueue)
   return outputRefs.innerHTML = watchedQueueTpl(localQueue);
 }
 
