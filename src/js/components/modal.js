@@ -10,12 +10,12 @@ const refs = {
   modal: document.querySelector('.modal-wrapper'),
 };
 
-
 async function onPictureClick(evt) {
   evt.preventDefault();
-  const target = evt.target;
 
+  const target = evt.target;
   const data = await newApiService.fetchOpenModal(target.dataset.id);
+  // console.log(data)
 
   // const arr = data.genres.map(item => item.name)
   // arr.splice(3)
@@ -55,8 +55,6 @@ function onEscKeyPress(e) {
     onCloseModal();
   }
 }
-
-
 
 refs.openList.addEventListener('click', onPictureClick)
 refs.closeModal.addEventListener('click', onCloseModal);

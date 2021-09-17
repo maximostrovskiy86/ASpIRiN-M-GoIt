@@ -1,13 +1,13 @@
 import newApiService from "../services/apiSevise";
-import {queueBtnRefs} from "../const/refs";
+import {outputRefs } from "../const/refs";
 import localStorageFn from "./localStorage";
+import watchedQueueTpl from "../../templates/watched-queue.hbs";
 
 
 export const queueSave = () => {
-  // e.preventDefault();
-  console.log()
   const film = newApiService.openFilm;
-  // console.log(data)
+  console.log(film)
+
   // localStorage.setItem('data', JSON.stringify(data));
   //
   // //
@@ -25,8 +25,29 @@ export const queueSave = () => {
 
   localQueue.push(film)
   localStorageFn.save('dataQueue', localQueue);
+  return localQueue;
+  // const markup = localQueue.map(item => {
+  //   console.log(item)
+  //   return item;
+  // })
+
+  // console.log(markup)
+
+  // appendMediaMarkup(localQueue);
 
 }
+
+ function appendMediaMarkup(queueSave) {
+  // const data = localStorage.getItem('dataQueue');
+  // const parseData = JSON.parse(data) || [];
+  // console.log(queueSave)
+   const localQueue = localStorageFn.load('dataQueue');
+   console.log(localQueue)
+  return outputRefs.innerHTML = watchedQueueTpl(localQueue);
+}
+
+export default appendMediaMarkup;
+
 
 
 

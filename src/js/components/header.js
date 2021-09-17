@@ -15,7 +15,7 @@ import {
 } from '../const/refs';
 
 import apiService from '../services/apiSevise';
-
+import libraryLinkMarkup from './queue';
 // =========================
 
 // =========================
@@ -35,6 +35,7 @@ function homeLibraryHeader() {
   libraryLink.classList.add('navigation__link--active');
   headerLink.classList.add('is-hidden');
   headerRefs.classList.add('bg-library');
+  libraryLinkMarkup();
 }
 
 homeLink.addEventListener('click', homeInputHeader);

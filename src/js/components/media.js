@@ -11,7 +11,7 @@ const onLoadPage = async () => {
   await newApiService.fetchGetGenres();
 
   const data = await newApiService.fetchGetMediaTrending(1);
-  console.log('data', data);
+  // console.log('data', data);
   initPagination(data.total_pages);
   // const paginationOptions = {
   //   itemsPerPage: 20,
