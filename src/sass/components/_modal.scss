@@ -10,11 +10,16 @@
   transition: opacity 750ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-content,
-.modal__table-data-row{
-  display: flex;
+.modal-content {
+  display: block;
+  @media screen and(min-width: 768px) {
+    display: flex;
+  }
 }
 
+.modal__table-data-row {
+  display: flex;
+}
 .backdrop.is-open {
   opacity: 1;
   pointer-events: initial;
@@ -66,14 +71,13 @@
 
 .modal__close-btn {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  right: 25px;
-  top: 25px;
+  width: 20px;
+  height: 20px;
+  right: 15px;
+  top: 15px;
   border: none;
   transform: rotate(-90deg);
   cursor: pointer;
-
 }
 
 .modal__close-btn:hover,
@@ -115,8 +119,6 @@
     line-height: 1.17;
   }
 }
-
-
 
 .modal__table-data {
   text-align: left;
