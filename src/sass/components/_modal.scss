@@ -1,3 +1,4 @@
+
 .backdrop {
   position: fixed;
   width: 100%;
@@ -209,21 +210,31 @@
   width: 112.58px;
   height: 44px;
 
+  color: #000000;
+
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
 
-  align-items: center;
-  text-align: center;
-  text-transform: uppercase;
-
   border: 1px solid #000000;
   box-sizing: border-box;
   border-radius: 5px;
 
-  color: #000000;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease-in;
+  &:hover {
+    box-shadow: 1px 4px 6px rgb(0 0 0 / 16%),
+    0 4px 4px rgb(0 0 0 / 6%),
+    0 1px 1px rgb(0 0 0 / 12%);
+  }
+
+
 
   @media screen and (min-width: 768px) {
     width: 125.03px;
@@ -248,7 +259,7 @@
 
 .modal__btn-active {
   border: 1px solid #ffffff;
-  background: #ff6b01;
-
+  background-color: #ff6b01;
   color: #ffffff;
+  transition: background-color 0.5s ease-in, color 0.5s ease-in;
 }
