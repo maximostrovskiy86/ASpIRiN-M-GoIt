@@ -11,7 +11,7 @@
 }
 
 .modal-content,
-.modal__table-data-row{
+.modal__table-data-row {
   display: flex;
 }
 
@@ -73,7 +73,6 @@
   border: none;
   transform: rotate(-90deg);
   cursor: pointer;
-
 }
 
 .modal__close-btn:hover,
@@ -83,6 +82,7 @@
 }
 
 .modal-picture {
+  object-fit: cover;
   width: 240px;
   height: 356.57px;
   border-radius: 5px;
@@ -115,8 +115,6 @@
     line-height: 1.17;
   }
 }
-
-
 
 .modal__table-data {
   text-align: left;
@@ -249,4 +247,9 @@
   background: #ff6b01;
 
   color: #ffffff;
+}
+.trailer {
+  &.is-hidden {
+    display: none;
+  }
 }

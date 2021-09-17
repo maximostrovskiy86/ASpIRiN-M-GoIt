@@ -1,7 +1,11 @@
 import modalTemplateTpl from '../../templates/modal.hbs';
 import newApiService from '../services/apiSevise';
-import {queueBtnRefs} from "../const/refs";
-import {queueSave} from "./queue";
+import { queueBtnRefs } from '../const/refs';
+import { queueSave } from './queue';
+import 'basiclightbox/dist/basicLightbox.min.css';
+import * as basicLightbox from 'basiclightbox';
+import { API_KEY } from '../const/index';
+import ApiServer from '../services/apiSevise';
 
 const refs = {
   openList: document.querySelector('.media-container'),
@@ -9,7 +13,6 @@ const refs = {
   backDrop: document.querySelector('.backdrop'),
   modal: document.querySelector('.modal-wrapper'),
 };
-
 
 async function onPictureClick(evt) {
   evt.preventDefault();
@@ -31,11 +34,21 @@ async function onPictureClick(evt) {
 
   const queueBtnRefs = document.querySelector('.js-queue');
   queueBtnRefs.addEventListener('click', queueSave);
+
+  // ТРЕЙЛЕРЫ ЛОГИКА
+  const trailerBtn = document.querySelector('.trailer');
+
+  const videos = data.videos.results || [];
+
+  const youtubeVideo = videos.find(video => video.site === 'YouTube');
+  if (youtubeVideo) {
+    trailerBtn.classList.remove('is-hidden');
+    trailerBtn.addEventListener('click', () => onShowTrailer(youtubeVideo));
+  }
 }
 
-
 function appendModalMarkup(data) {
-  return refs.modal.innerHTML = modalTemplateTpl(data);
+  return (refs.modal.innerHTML = modalTemplateTpl(data));
 }
 
 function onCloseModal() {
@@ -56,10 +69,18 @@ function onEscKeyPress(e) {
   }
 }
 
+async function onShowTrailer(youtubeVideo) {
+  const instance = basicLightbox.create(`
+      <iframe src="https://www.youtube.com/embed/${youtubeVideo.key}?autoplay=1&origin" width="560" height="315" frameborder="0"></iframe>
+  `);
 
+  instance.show();
+}
 
-refs.openList.addEventListener('click', onPictureClick)
+refs.openList.addEventListener('click', onPictureClick);
 refs.closeModal.addEventListener('click', onCloseModal);
 refs.backDrop.addEventListener('click', onbackDropClick);
 
-
+// 1-сделать запрас на api и передать ей id
+// 2- получить ответ и взять массив на трейллеры вытянууть от туда key
+// 3 взять код из доков и подставить key

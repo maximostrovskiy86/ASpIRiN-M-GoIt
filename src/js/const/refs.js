@@ -11,4 +11,4 @@ export const formRefs = document.querySelector('#header__form');
 export const queueRefs = document.querySelector('.list-queue');
 export const queueBtnRefs = document.querySelector('.js-queue');
 export const spinner = document.querySelector('.mask');
-
+export const checkBox = document.querySelector('#theme-switch-toggle');
