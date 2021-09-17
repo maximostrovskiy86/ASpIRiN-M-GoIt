@@ -2,6 +2,7 @@ import modalTemplateTpl from '../../templates/modal.hbs';
 import newApiService from '../services/apiSevise';
 import { queueBtnRefs } from '../const/refs';
 import { queueSave } from './queue';
+import localStorageFn from './localStorage';
 
 const refs = {
   openList: document.querySelector('.media-container'),
@@ -59,3 +60,5 @@ function onEscKeyPress(e) {
 refs.openList.addEventListener('click', onPictureClick);
 refs.closeModal.addEventListener('click', onCloseModal);
 refs.backDrop.addEventListener('click', onbackDropClick);
+
+

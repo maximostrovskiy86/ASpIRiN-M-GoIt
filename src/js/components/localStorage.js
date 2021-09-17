@@ -19,4 +19,14 @@ const save = (key, value) => {
   }
 };
 
-export default { load, save };
+// Принимает ключ `key` по которому будет произведено удаление из LS.
+
+const remove = key => {
+  try {
+    return localStorage.removeItem(key);
+  } catch (error) {
+    return null;
+  }
+};
+
+export default { load, save, remove };
