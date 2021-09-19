@@ -1,11 +1,14 @@
 .media-container {
   cursor: pointer;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   margin-left: -15px;
   margin-top: -15px;
   padding: 25px 0;
+  @media screen and (max-width: 1023px) {
+    justify-content: center;
+  }
+
   .film-card {
     margin-left: 15px;
     margin-top: 15px;
@@ -25,25 +28,31 @@
   font-size: 12px;
   font-style: normal;
   line-height: 1.16;
+
   &__title {
     text-transform: uppercase;
   }
+
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     color: #ff6b08;
+
     &-genre {
       margin-right: 3px;
+
       &:last-child {
         color: transparent;
       }
     }
+
     &-date {
       margin-right: 5px;
       padding-left: 3px;
       border-left: 1px solid #ff6b08;
     }
+
     &-rating {
       padding: 1px 10px;
       background: #ff6b01;
