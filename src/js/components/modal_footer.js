@@ -1,5 +1,5 @@
 const refs = {
-  footerLink: document.querySelector('.footer-link'),
+  footerLink: document.querySelector('.footer-item-text'),
   openModalFooter: document.querySelector('.js-lightbox'),
   closeModalBtn: document.querySelector('[data-action="close-lightbox"]'),
   modalWindowOverlay: document.querySelector('.lightbox__overlay'),
@@ -7,13 +7,10 @@ const refs = {
 
 function onFooterClick(evt) {
   evt.preventDefault();
-
-  if (!evt.target.classList.contains('footer-link')) {
-    return;
-  }
-
+  // if (evt.target.classList.contains('lightbox__content')) {
+  //   return;
+  // }
   window.addEventListener('keydown', onEscKeyPress);
-
   refs.openModalFooter.classList.add('is-open');
   //   refs.modalWindow.src = evt.target.dataset.source;
 }
