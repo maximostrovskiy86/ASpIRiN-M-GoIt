@@ -67,9 +67,10 @@ img {
   width: 274px;
   height: 398px;
   border-radius: 5px;
+  transition: transform  0.250s ease-in;
 }
 
 img:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   box-shadow: 0 8px 43px rgba(255, 107, 1, 0.6);
 }
