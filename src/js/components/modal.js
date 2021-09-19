@@ -35,7 +35,7 @@ async function onPictureClick(evt) {
   const queueBtnRefs = document.querySelector('.js-queue');
   queueBtnRefs.addEventListener('click', queueSave);
 
-  // ТРЕЙЛЕРЫ ЛОГИКА
+  // ТРЕЙЛЕРЫ ЛОГИКА================
   const trailerBtn = document.querySelector('.trailer');
 
   const videos = data.videos.results || [];
