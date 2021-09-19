@@ -1,9 +1,12 @@
 import modalTemplateTpl from '../../templates/modal.hbs';
 import newApiService from '../services/apiSevise';
+
 import {watchedSave, queueSave, changeButtonWatched, changeButtonQueue} from './queue';
 import localStorageFn from "./localStorage";
 import 'basiclightbox/dist/basicLightbox.min.css';
 import * as basicLightbox from 'basiclightbox';
+import localStorageFn from './localStorage';
+
 
 const refs = {
   openList: document.querySelector('.media-container'),
@@ -90,6 +93,7 @@ refs.openList.addEventListener('click', onPictureClick);
 refs.closeModal.addEventListener('click', onCloseModal);
 refs.backDrop.addEventListener('click', onbackDropClick);
 
+
 async function onShowTrailer(youtubeVideo) {
   const instance = basicLightbox.create(`
       <iframe src="https://www.youtube.com/embed/${youtubeVideo.key}?autoplay=1&origin" width="560" height="315" frameborder="0"></iframe>
@@ -97,3 +101,4 @@ async function onShowTrailer(youtubeVideo) {
 
   instance.show();
 }
+
