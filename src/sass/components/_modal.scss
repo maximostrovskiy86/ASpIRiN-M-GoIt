@@ -10,13 +10,14 @@
   pointer-events: none;
   transition: opacity 750ms cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: scroll;
+  z-index: 200;
 }
 
 .modal-content {
   display: block;
-  @media screen and(min-width: 768px) {
-    z-index: 200;
-  }
+  //@media screen and(min-width: 768px) {
+  //  z-index: 200;
+  //}
 }
 
 .modal-content,
@@ -215,6 +216,7 @@
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .modal__btn {
@@ -281,9 +283,13 @@
   height: 50px;
   // border-radius: 5px;
   border: none;
-  background-image: url(../images/icon-youtube.svg);
+  background-image: url('../images/icon-youtube.svg');
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media screen and (max-width: 1023px ){
+    margin-top: 10px;
+  }
   //background-size: 60px;
   // box-shadow: #ff6b01;
 
