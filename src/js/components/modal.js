@@ -2,7 +2,6 @@ import modalTemplateTpl from '../../templates/modal.hbs';
 import newApiService from '../services/apiSevise';
 
 import {watchedSave, queueSave, changeButtonWatched, changeButtonQueue} from './queue';
-import localStorageFn from "./localStorage";
 import 'basiclightbox/dist/basicLightbox.min.css';
 import * as basicLightbox from 'basiclightbox';
 import localStorageFn from './localStorage';

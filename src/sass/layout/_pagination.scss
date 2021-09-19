@@ -41,7 +41,11 @@
 }
 
 .tui-pagination .tui-page-btn:hover {
-  background-color: #f4f4f4;
+  //background-color: #f4f4f4;
+  color: #fff;
+  background: #ff6b08;
+  border-color: #ff6b08;
+  border-radius: 5px;
 }
 
 .tui-pagination .tui-is-selected,

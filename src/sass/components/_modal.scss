@@ -85,16 +85,17 @@
   width: 20px;
   height: 20px;
   right: 15px;
-  top: 15px;
+  top: 25px;
   border: none;
   transform: rotate(-90deg);
   cursor: pointer;
+  background: none;
 }
 
 .modal__close-btn:hover,
 .modal__close-btn:focus {
-  color: hsl(25, 100%, 50%);
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  fill: hsl(25, 100%, 50%);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal-picture {
@@ -274,19 +275,19 @@
   border: 1px solid #ffffff;
   background-color: #ff6b01;
   color: #ffffff;
-  transition: background-color 0.5s ease-in, color 0.5s ease-in;
+  transition: background-color 0.25s ease-in, color 0.25s ease-in;
 }
 
 .trailer {
-  width: 70px;
-  height: 50px;
-  // border-radius: 5px;
+  width: 63px;
+  height: 45px;
+  border-radius: 5px;
   border: none;
   background-image: url('../images/icon-youtube.svg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 
-  @media screen and (max-width: 1023px ){
+  @media screen and (max-width: 1023px) {
     margin-top: 10px;
   }
   //background-size: 60px;
