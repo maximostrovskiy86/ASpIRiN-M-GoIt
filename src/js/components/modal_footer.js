@@ -7,12 +7,10 @@ const refs = {
 
 function onFooterClick(evt) {
   evt.preventDefault();
-  // if (evt.target.classList.contains('lightbox__content')) {
-  //   return;
-  // }
+
   window.addEventListener('keydown', onEscKeyPress);
   refs.openModalFooter.classList.add('is-open');
-  //   refs.modalWindow.src = evt.target.dataset.source;
+  document.body.style.overflow = 'hidden';
 }
 
 refs.footerLink.addEventListener('click', onFooterClick);
@@ -22,7 +20,7 @@ refs.modalWindowOverlay.addEventListener('click', onModalWindowOverlayClick);
 function onCloseModalBtnClick() {
   window.removeEventListener('keydown', onEscKeyPress);
   refs.openModalFooter.classList.remove('is-open');
-  //   refs.modalWindow.src = '';
+  document.body.style.overflow = 'auto';
 }
 
 function onModalWindowOverlayClick(event) {
