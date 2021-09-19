@@ -1,7 +1,7 @@
 import modalTemplateTpl from '../../templates/modal.hbs';
 import newApiService from '../services/apiSevise';
-// import { queueBtnRefs } from '../const/refs';
-import { watchedSave, queueSave } from './queue';
+import {watchedSave, queueSave, changeButtonWatched, changeButtonQueue} from './queue';
+import localStorageFn from "./localStorage";
 
 const refs = {
   openList: document.querySelector('.media-container'),
@@ -15,7 +15,8 @@ async function onPictureClick(evt) {
 
   const target = evt.target;
   const data = await newApiService.fetchOpenModal(target.dataset.id);
-  // console.log(data)g
+
+  console.log(target.dataset.id)
 
   // const arr = data.genres.map(item => item.name)
   // arr.splice(3)
@@ -35,10 +36,18 @@ async function onPictureClick(evt) {
 
   watchedBtnRefs.addEventListener('click', watchedSave);
   queueBtnRefs.addEventListener('click', queueSave);
+
+  const localWatched = localStorageFn.load('dataWatched');
+  const isFindWatched = localWatched.some(item => item.id === +target.dataset.id);
+  changeButtonWatched(isFindWatched, watchedBtnRefs);
+
+  const localQueue = localStorageFn.load('dataQueue');
+  const isFindQueue = localQueue.some(item => item.id === +target.dataset.id);
+  changeButtonQueue(isFindQueue, queueBtnRefs);
 }
 
 function appendModalMarkup(data) {
-  return (refs.modal.innerHTML = modalTemplateTpl(data));
+  refs.modal.innerHTML = modalTemplateTpl(data);
 }
 
 function onCloseModal() {

@@ -1,8 +1,6 @@
 import {queueBtn,watchedBtn} from '../const/refs';
-import itemMediaTpl from '../../templates/item-media.hbs';
 import errorNotification from './pnotify';
 import startPagination from '../components/tui-pagination';
-import prepareData from '../services/prepareData';
 
 import {
   homeLink,
@@ -50,7 +48,6 @@ function openWatched() {
   watchedBtn.classList.add('accent-color');
 }
 
-
 queueBtn.addEventListener('click', openQueue);
 watchedBtn.addEventListener('click', openWatched);
 
@@ -61,9 +58,8 @@ formRefs.addEventListener('submit', serchMovieHandler);
 
 async function serchMovieHandler(event) {
   event.preventDefault();
+
   apiService.searchQuery = event.currentTarget.elements.form__input.value;
-  // apiService.searchMovie().then(data => console.log('data', data));
-  // const genres = await apiService.fetchGetGenres();
   if (apiService.query === '') {
     onLoadPage();
     return;
@@ -75,16 +71,5 @@ async function serchMovieHandler(event) {
     return;
   }
 
-  // const newData = { ...data, results: result };
-  // console.log(newData);
-  // const newData = prepareData(data);
-  // console.log('newData:', newData)
-  // appendMediaMarkup(newData);
   startPagination(data.total_pages);
 }
-
-// ===============================
-
-// function appendMediaMarkup({results}) {
-//   return (outputRefs.innerHTML = itemMediaTpl(results));
-// }

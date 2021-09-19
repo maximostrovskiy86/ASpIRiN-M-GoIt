@@ -8,10 +8,19 @@ const prepareData = apiData => {
     release_date: newDataModification.getDate(item),
     genre_ids: newDataModification.getGenres([...item.genre_ids], newApiService.genres),
   }));
-  return { ...apiData, results: result };
+  return {...apiData, results: result};
 };
 
-export default prepareData;
+const prepareDataWQ = apiData => {
+  return apiData.map(item => ({
+    ...item,
+    release_date: newDataModification.getDate(item),
+    // genre_ids: newDataModification.getGenres([...item.genres], newApiService.genres),
+    genre_ids: item.genres.map(genre => genre.name).slice(0, 3).join(', '),
+  }));
+};
+
+export default {prepareData, prepareDataWQ};
 
 // =====================нужно
 // const normilizedResults = results.map(movie => {

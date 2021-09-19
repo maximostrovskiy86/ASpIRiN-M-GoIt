@@ -1,89 +1,96 @@
 import newApiService from "../services/apiSevise";
-import {outputRefs, watchedBtn, watchedBtnRefs} from "../const/refs";
+import {outputRefs, watchedBtn} from "../const/refs";
 import localStorageFn from "./localStorage";
 import watchedQueueTpl from "../../templates/item-media.hbs";
+import newData from "../services/prepareData";
+
+const themeText = {
+  enabledWatched: 'Add to Watched',
+  disabledWatched: 'Remove from watched',
+  enableQueue: 'Add to queue',
+  disableQueue: 'Remove to queue',
+};
+
+export const changeButtonWatched = (isFind, targetBtn) => {
+  targetBtn.textContent = isFind ? themeText.disabledWatched : themeText.enabledWatched;
+  if (isFind) {
+    targetBtn.classList.add('modal__btn-active');
+  } else {
+    targetBtn.classList.remove('modal__btn-active');
+  }
+}
+
+export const changeButtonQueue = (isFind, targetBtn) => {
+  targetBtn.textContent = isFind ? themeText.disableQueue : themeText.enableQueue;
+  if (isFind) {
+    targetBtn.classList.add('modal__btn-active');
+  } else {
+    targetBtn.classList.remove('modal__btn-active');
+  }
+}
 
 export const watchedSave = (e) => {
   const film = newApiService.openedFilm;
-  const localWatched = localStorageFn.load('dataWatched');
-  console.log(localWatched)
 
-  if (!localWatched) {
+  const localWatched = localStorageFn.load('dataWatched');
+  const target = e.target;
+
+  if (!localWatched.length) {
     const arrayWatched = [film];
     localStorageFn.save('dataWatched', arrayWatched);
+    changeButtonWatched(true, target);
     return;
   }
 
   const isFind = localWatched.some(item => item.id === film.id);
-  const target = e.target;
-
-  const themeColor = {
-    enabled: 'Add to Watched',
-    disabled: 'Remove movie',
-  };
-
-
-  function buttonSwitcher() {
-    const buttonStatus = localStorage.getItem('theme');
-    if (buttonStatus && buttonStatus === themeColor.disabled) {
-      target.classList.add('modal__btn-active');
-      target.textContent = 'Remove movie';
-      return;
-    }
-  }
-  // buttonSwitcher();
-
+  changeButtonWatched(!isFind, target);
 
   if (isFind) {
-    target.classList.remove('modal__btn-active');
-
     const newLocalWatched = localWatched.filter(item => item.id !== film.id);
-
-    localStorage.setItem('theme', themeColor.enabled);
     localStorageFn.save('dataWatched', newLocalWatched);
-    target.textContent = 'Add to Watched';
-    return;
-  }
-
-  if (localWatched.length === 0 || !isFind) {
-    target.classList.add('modal__btn-active');
+  } else {
     localWatched.push(film);
     localStorageFn.save('dataWatched', localWatched);
-    target.textContent = 'Remove movie';
-    localStorage.setItem('theme', themeColor.disabled);
-    return;
   }
 }
 
 export function appendWatchedMarkup() {
   const localWatched = localStorageFn.load('dataWatched');
+  console.log(localWatched)
   watchedBtn.classList.add('accent-color');
-  return outputRefs.innerHTML = watchedQueueTpl(localWatched);
+  const newLocalWatched = newData.prepareDataWQ(localWatched);
+  console.log(newLocalWatched)
+  return outputRefs.innerHTML = watchedQueueTpl(newLocalWatched);
 }
 
-export const queueSave = () => {
+export const queueSave = (e) => {
   const film = newApiService.openedFilm;
   const localQueue = localStorageFn.load('dataQueue');
+  const target = e.target;
 
-
-  if (!localQueue) {
+  if (!localQueue.length) {
     const arrayQueue = [film];
     localStorageFn.save('dataQueue', arrayQueue);
+    changeButtonQueue(true, target);
     return;
   }
 
   const isFind = localQueue.some(item => item.id === film.id);
+  changeButtonQueue(!isFind, target);
 
-  if (localQueue.length === 0 || !isFind) {
+  if (isFind) {
+    const newLocalQueue = localQueue.filter(item => item.id !== film.id);
+    localStorageFn.save('dataQueue', newLocalQueue);
+  } else {
     localQueue.push(film);
     localStorageFn.save('dataQueue', localQueue);
-    return;
   }
 }
 
 export function appendQueueMarkup() {
   const localQueue = localStorageFn.load('dataQueue');
-  return outputRefs.innerHTML = watchedQueueTpl(localQueue);
+  const newLocalQueue = newData.prepareDataWQ(localQueue);
+  return outputRefs.innerHTML = watchedQueueTpl(newLocalQueue);
 }
 
 

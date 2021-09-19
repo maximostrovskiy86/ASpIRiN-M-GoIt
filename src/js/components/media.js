@@ -3,7 +3,7 @@ import Pagination from 'tui-pagination';
 import { outputRefs } from '../const/refs';
 import newApiService from '../services/apiSevise';
 import newDataModification from './dataModification';
-import prepareData from '../services/prepareData';
+import newPrepareData from '../services/prepareData';
 import itemMediaTpl from '../../templates/item-media.hbs';
 import initPagination from '../components/tui-pagination';
 
@@ -14,7 +14,7 @@ const onLoadPage = async () => {
   // console.log('data', data);
   initPagination(data.total_pages);
 
-  const newData = prepareData(data);
+  const newData = newPrepareData.prepareData(data);
   appendMediaMarkup(newData);
 };
 onLoadPage();
