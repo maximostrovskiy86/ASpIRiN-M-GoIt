@@ -1,6 +1,6 @@
 <div class="modal-content">
   <div class='modal__content-picture'>
-    <img class='modal-picture' src='https://image.tmdb.org/t/p/w500/{{poster_path}}' alt=''/>
+    <img class='modal-picture' src='{{poster_path}}' alt=''/>
   </div>
   <div class='modal__content-discription'>
     <h2 class='modal__content-discription-title'>{{title}}</h2>
@@ -10,7 +10,7 @@
         <tr class='modal__table-data-row'>
           <th class='modal__table-head'>Vote/Votes &emsp;</th>
           <td class='modal__table-data'>
-            <span class='modal__table-data-votes'>{{vote_average}}</span>&emsp;/&emsp;
+            <span class='modal__table-data-votes'>{{vote_average}}</span>
             {{vote_count}}
           </td>
         </tr>

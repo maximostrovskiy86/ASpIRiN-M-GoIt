@@ -1,7 +1,9 @@
 import {queueBtn,watchedBtn} from '../const/refs';
 import errorNotification from './pnotify';
 import startPagination from '../components/tui-pagination';
-
+import apiService from '../services/apiSevise';
+import {appendQueueMarkup, appendWatchedMarkup} from './queue';
+import appendMediaMarkup from './media'
 import {
   homeLink,
   libraryLink,
@@ -12,9 +14,7 @@ import {
   formRefs,
 } from '../const/refs';
 
-import apiService from '../services/apiSevise';
-import {appendQueueMarkup, appendWatchedMarkup} from './queue';
-import appendMediaMarkup from './media'
+
 
 function homeInputHeader() {
   inputLink.classList.remove('is-hidden');
@@ -56,6 +56,8 @@ libraryLink.addEventListener('click', homeLibraryHeader);
 
 formRefs.addEventListener('submit', serchMovieHandler);
 
+const clearpagination = document.querySelector('.tui-pagination-parent');
+
 async function serchMovieHandler(event) {
   event.preventDefault();
 
@@ -68,8 +70,10 @@ async function serchMovieHandler(event) {
 
   if (data.results.length === 0) {
     errorNotification();
+    clearpagination.classList.add('is-hidden');
     return;
   }
+  clearpagination.classList.remove('is-hidden');
 
   startPagination(data.total_pages);
 }

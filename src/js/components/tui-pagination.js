@@ -1,5 +1,4 @@
 import newApiService from '../services/apiSevise';
-import 'tui-pagination/dist/tui-pagination.css';
 import newPrepareData from '../services/prepareData';
 import Pagination from 'tui-pagination';
 import {outputRefs} from '../const/refs';
@@ -15,7 +14,8 @@ function pagination(totalResults) {
   const paginationOptions = {
     itemsPerPage: 20,
     visiblePages: 5,
-    totalItems: totalResults > 10000 ? 10000 : totalResults,
+    // totalItems: totalResults > 10000 ? 10000 : totalResults,
+    totalItems: totalResults,
   };
   const pagination = new Pagination(paginationContainer, paginationOptions);
 

@@ -1,5 +1,5 @@
 import newApiService from "../services/apiSevise";
-import {outputRefs, watchedBtn} from "../const/refs";
+import {outputRefs, watchedBtn, queueBtn} from "../const/refs";
 import localStorageFn from "./localStorage";
 import watchedQueueTpl from "../../templates/item-media.hbs";
 import newData from "../services/prepareData";
@@ -58,6 +58,7 @@ export function appendWatchedMarkup() {
   const localWatched = localStorageFn.load('dataWatched');
   console.log(localWatched)
   watchedBtn.classList.add('accent-color');
+  queueBtn.classList.remove('accent-color');
   const newLocalWatched = newData.prepareDataWQ(localWatched);
   console.log(newLocalWatched)
   return outputRefs.innerHTML = watchedQueueTpl(newLocalWatched);
