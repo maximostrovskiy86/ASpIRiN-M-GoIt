@@ -31,7 +31,7 @@ async function onPictureClick(evt) {
   window.addEventListener('keydown', onEscKeyPress);
   appendModalMarkup(data);
   refs.backDrop.classList.add('is-open');
-
+  document.body.classList.add('no-scroll');
   const queueBtnRefs = document.querySelector('.js-queue');
   queueBtnRefs.addEventListener('click', queueSave);
 
@@ -54,6 +54,7 @@ function appendModalMarkup(data) {
 function onCloseModal() {
   window.removeEventListener('keydown', onEscKeyPress);
   refs.backDrop.classList.remove('is-open');
+  document.body.classList.remove('no-scroll');
 }
 
 function onbackDropClick(e) {
