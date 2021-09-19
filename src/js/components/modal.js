@@ -31,14 +31,15 @@ async function onPictureClick(evt) {
   window.addEventListener('keydown', onEscKeyPress);
   appendModalMarkup(data);
   refs.backDrop.classList.add('is-open');
+
   document.body.style.overflow = 'hidden';
+  document.body.classList.add('no-scroll');
 
   const watchedBtnRefs = document.querySelector('.js-watched');
   const queueBtnRefs = document.querySelector('.js-queue');
 
   watchedBtnRefs.addEventListener('click', watchedSave);
   queueBtnRefs.addEventListener('click', queueSave);
-
 
   const localWatched = localStorageFn.load('dataWatched');
   const isFindWatched = localWatched.some(item => item.id === +target.dataset.id);
@@ -51,6 +52,7 @@ async function onPictureClick(evt) {
 
 function appendModalMarkup(data) {
   refs.modal.innerHTML = modalTemplateTpl(data);
+
 
   // ТРЕЙЛЕРЫ ЛОГИКА
   const trailerBtn = document.querySelector('.trailer');
@@ -66,7 +68,9 @@ function appendModalMarkup(data) {
 function onCloseModal() {
   window.removeEventListener('keydown', onEscKeyPress);
   refs.backDrop.classList.remove('is-open');
+
   document.body.style.overflow = 'auto';
+  document.body.classList.remove('no-scroll');
 }
 
 function onbackDropClick(e) {
