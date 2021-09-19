@@ -2,6 +2,8 @@ import modalTemplateTpl from '../../templates/modal.hbs';
 import newApiService from '../services/apiSevise';
 import {watchedSave, queueSave, changeButtonWatched, changeButtonQueue} from './queue';
 import localStorageFn from "./localStorage";
+import 'basiclightbox/dist/basicLightbox.min.css';
+import * as basicLightbox from 'basiclightbox';
 
 const refs = {
   openList: document.querySelector('.media-container'),
@@ -37,6 +39,7 @@ async function onPictureClick(evt) {
   watchedBtnRefs.addEventListener('click', watchedSave);
   queueBtnRefs.addEventListener('click', queueSave);
 
+
   const localWatched = localStorageFn.load('dataWatched');
   const isFindWatched = localWatched.some(item => item.id === +target.dataset.id);
   changeButtonWatched(isFindWatched, watchedBtnRefs);
@@ -48,6 +51,16 @@ async function onPictureClick(evt) {
 
 function appendModalMarkup(data) {
   refs.modal.innerHTML = modalTemplateTpl(data);
+
+  // ТРЕЙЛЕРЫ ЛОГИКА
+  const trailerBtn = document.querySelector('.trailer');
+  const videos = data.videos.results || [];
+  const youtubeVideo = videos.find(video => video.site === 'YouTube');
+
+  if (youtubeVideo) {
+    trailerBtn.classList.remove('is-hidden');
+    trailerBtn.addEventListener('click', () => onShowTrailer(youtubeVideo));
+  }
 }
 
 function onCloseModal() {
@@ -72,3 +85,11 @@ function onEscKeyPress(e) {
 refs.openList.addEventListener('click', onPictureClick);
 refs.closeModal.addEventListener('click', onCloseModal);
 refs.backDrop.addEventListener('click', onbackDropClick);
+
+async function onShowTrailer(youtubeVideo) {
+  const instance = basicLightbox.create(`
+      <iframe src="https://www.youtube.com/embed/${youtubeVideo.key}?autoplay=1&origin" width="560" height="315" frameborder="0"></iframe>
+  `);
+
+  instance.show();
+}

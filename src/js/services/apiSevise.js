@@ -12,7 +12,6 @@ class ApiService {
       `${BASE_FETCH_URL}/trending/movie/week?page=${page}&api_key=${API_KEY}`,
     );
     const movies = await response.json();
-    // console.log(movies)
     return movies;
   }
 
@@ -38,7 +37,9 @@ class ApiService {
   }
 
   async fetchOpenModal(id) {
-    const response = await fetch(`${BASE_FETCH_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`);
+    const response = await fetch(
+      `${BASE_FETCH_URL}/movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=videos`,
+    );
     const movie = await response.json();
     // console.log(movie)
     this.openedFilm = movie;

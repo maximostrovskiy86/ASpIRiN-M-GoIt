@@ -11,7 +11,6 @@
   transition: opacity 750ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
 .modal-content {
   display: block;
   @media screen and(min-width: 768px) {
@@ -19,9 +18,11 @@
   }
 }
 
+.modal-content,
 .modal__table-data-row {
   display: flex;
 }
+
 .backdrop.is-open {
   opacity: 1;
   pointer-events: initial;
@@ -89,6 +90,7 @@
 }
 
 .modal-picture {
+  object-fit: cover;
   width: 240px;
   height: 356.57px;
   border-radius: 5px;
@@ -229,12 +231,12 @@
 
   cursor: pointer;
   transition: box-shadow 0.25s ease-in;
+
   &:hover {
     box-shadow: 1px 4px 6px rgb(0 0 0 / 16%),
     0 4px 4px rgb(0 0 0 / 6%),
     0 1px 1px rgb(0 0 0 / 12%);
   }
-
 
 
   @media screen and (min-width: 768px) {
@@ -263,4 +265,10 @@
   background-color: #ff6b01;
   color: #ffffff;
   transition: background-color 0.5s ease-in, color 0.5s ease-in;
+}
+
+.trailer {
+  &.is-hidden {
+    display: none;
+  }
 }
