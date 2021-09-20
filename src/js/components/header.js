@@ -1,9 +1,11 @@
-import {queueBtn,watchedBtn} from '../const/refs';
+import {outputRefs, queueBtn, watchedBtn} from '../const/refs';
 import errorNotification from './pnotify';
 import startPagination from '../components/tui-pagination';
 import apiService from '../services/apiSevise';
 import {appendQueueMarkup, appendWatchedMarkup} from './queue';
-import appendMediaMarkup from './media'
+import {appendMediaMarkup} from './media';
+import newPrepareData from '../services/prepareData';
+
 import {
   homeLink,
   libraryLink,
@@ -13,8 +15,8 @@ import {
   headerRefs,
   formRefs,
 } from '../const/refs';
-
-
+import itemMediaTpl from "../../templates/item-media.hbs";
+import onLoadPage from "./media";
 
 function homeInputHeader() {
   inputLink.classList.remove('is-hidden');
@@ -23,7 +25,8 @@ function homeInputHeader() {
   libraryLink.classList.remove('navigation__link--active');
   headerLink.classList.remove('is-hidden');
   headerRefs.classList.remove('bg-library');
-  appendMediaMarkup();
+  clearpagination.classList.remove('is-hidden');
+  onLoadPage();
 }
 
 function homeLibraryHeader() {
@@ -34,6 +37,8 @@ function homeLibraryHeader() {
   headerLink.classList.add('is-hidden');
   headerRefs.classList.add('bg-library');
   appendWatchedMarkup();
+  clearpagination.classList.add('is-hidden');
+
 }
 
 function openQueue() {
@@ -62,7 +67,7 @@ async function serchMovieHandler(event) {
   event.preventDefault();
 
   apiService.searchQuery = event.currentTarget.elements.form__input.value;
-  if (apiService.query === '') {
+  if (apiService.searchQuery === '') {
     onLoadPage();
     return;
   }
@@ -70,10 +75,14 @@ async function serchMovieHandler(event) {
 
   if (data.results.length === 0) {
     errorNotification();
-    clearpagination.classList.add('is-hidden');
+    apiService.searchQuery = '';
     return;
   }
+
   clearpagination.classList.remove('is-hidden');
 
-  startPagination(data.total_pages);
+  startPagination(data.total_results);
+
+  const newData = newPrepareData.prepareData(data);
+  appendMediaMarkup(newData);
 }

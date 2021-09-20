@@ -3,3 +3,20 @@ body {
   color: #000;
   background-color: #fff;
 }
+
+.main-page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.add-film {
+  width: 100%;
+  margin-top: 50px;
+  text-align: center;
+  font-size: 42px;
+}

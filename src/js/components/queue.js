@@ -56,11 +56,13 @@ export const watchedSave = (e) => {
 
 export function appendWatchedMarkup() {
   const localWatched = localStorageFn.load('dataWatched');
-  console.log(localWatched)
   watchedBtn.classList.add('accent-color');
   queueBtn.classList.remove('accent-color');
+  if (localWatched.length === 0) {
+    outputRefs.innerHTML = `<h1 class="add-film">Oops ... there's nothing here</h1>`
+    return;
+  }
   const newLocalWatched = newData.prepareDataWQ(localWatched);
-  console.log(newLocalWatched)
   return outputRefs.innerHTML = watchedQueueTpl(newLocalWatched);
 }
 
@@ -90,6 +92,10 @@ export const queueSave = (e) => {
 
 export function appendQueueMarkup() {
   const localQueue = localStorageFn.load('dataQueue');
+  if (localQueue.length === 0) {
+    outputRefs.innerHTML = `<h1 class="add-film">Oops ... there's nothing here</h1>`
+    return;
+  }
   const newLocalQueue = newData.prepareDataWQ(localQueue);
   return outputRefs.innerHTML = watchedQueueTpl(newLocalQueue);
 }
