@@ -59,6 +59,7 @@ export function appendWatchedMarkup() {
   watchedBtn.classList.add('accent-color');
   queueBtn.classList.remove('accent-color');
   if (localWatched.length === 0) {
+    // outputRefs.innerHTML = `<h1 class="add-film">Oops ... there's nothing here</h1>`;
     outputRefs.innerHTML = `<h1 class="add-film">Oops ... there's nothing here</h1>`
     return;
   }
