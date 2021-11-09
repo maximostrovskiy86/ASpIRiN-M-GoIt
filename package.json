@@ -6,7 +6,7 @@
   "homepage": "https://maximostrovskiy86.github.io/film-catalog/",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /ASpIRiN-M-GoIt/"
+    "build": "parcel build src/*.html --public-url /film-catalog/"
   },
   "repository": {
     "type": "git",
